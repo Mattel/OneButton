@@ -28,7 +28,7 @@
 // ----- Callback function types -----
 
 extern "C" {
-typedef void (*callbackFunction)(void);
+typedef void (*callbackFunction)(int);
 typedef void (*parameterizedCallbackFunction)(void*);
 }
 

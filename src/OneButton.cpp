@@ -212,13 +212,13 @@ void OneButton::tick(bool activeLevel)
                ((unsigned long)(now - _startTime) > _pressTicks)) {
       _isLongPressed = true; // Keep track of long press state
       if (_pressFunc)
-        _pressFunc();
+        _pressFunc(_pin);
       if (_longPressStartFunc)
-        _longPressStartFunc();
+        _longPressStartFunc(_pin);
       if (_paramLongPressStartFunc)
         _paramLongPressStartFunc(_longPressStartFuncParam);
       if (_duringLongPressFunc)
-        _duringLongPressFunc();
+        _duringLongPressFunc(_pin);
       if (_paramDuringLongPressFunc)
         _paramDuringLongPressFunc(_duringLongPressFuncParam);
       _state = 6; // step to state 6
@@ -233,7 +233,7 @@ void OneButton::tick(bool activeLevel)
         (unsigned long)(now - _startTime) > _clickTicks) {
       // this was only a single short click
       if (_clickFunc)
-        _clickFunc();
+        _clickFunc(_pin);
       if (_paramClickFunc)
         _paramClickFunc(_clickFuncParam);
       _state = 0; // restart.
@@ -251,7 +251,7 @@ void OneButton::tick(bool activeLevel)
         ((unsigned long)(now - _startTime) > _debounceTicks)) {
       // this was a 2 click sequence.
       if (_doubleClickFunc)
-        _doubleClickFunc();
+        _doubleClickFunc(_pin);
       if (_paramDoubleClickFunc)
         _paramDoubleClickFunc(_doubleClickFuncParam);
       _state = 0; // restart.
@@ -263,7 +263,7 @@ void OneButton::tick(bool activeLevel)
     if (!activeLevel) {
       _isLongPressed = false; // Keep track of long press state
       if (_longPressStopFunc)
-        _longPressStopFunc();
+        _longPressStopFunc(_pin);
       if (_paramLongPressStopFunc)
         _paramLongPressStopFunc(_longPressStopFuncParam);
       _state = 0; // restart.
@@ -272,7 +272,7 @@ void OneButton::tick(bool activeLevel)
       // button is being long pressed
       _isLongPressed = true; // Keep track of long press state
       if (_duringLongPressFunc)
-        _duringLongPressFunc();
+        _duringLongPressFunc(_pin);
       if (_paramDuringLongPressFunc)
         _paramDuringLongPressFunc(_duringLongPressFuncParam);
     } // if
