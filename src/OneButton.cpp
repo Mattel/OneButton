@@ -31,24 +31,7 @@ OneButton::OneButton()
 OneButton::OneButton(int pin, int activeLow, bool pullupActive)
 {
   // OneButton();
-  _pin = pin;
-
-  if (activeLow) {
-    // the button connects the input pin to GND when pressed.
-    _buttonPressed = LOW;
-
-  } else {
-    // the button connects the input pin to VCC when pressed.
-    _buttonPressed = HIGH;
-  } // if
-
-  if (pullupActive) {
-    // use the given pin as input and activate internal PULLUP resistor.
-    pinMode(pin, INPUT_PULLUP);
-  } else {
-    // use the given pin as input
-    pinMode(pin, INPUT);
-  } // if
+  init(pin, activeLow, pullupActive);
 } // OneButton
 
 
